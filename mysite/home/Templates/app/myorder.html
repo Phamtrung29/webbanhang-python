@@ -1,0 +1,50 @@
+{% extends "app/base.html" %} {% load static %} {% block main-myorder %}
+<!-- My Order Section -->
+<section id="my-order" class="section-p1">
+  <h2>My Order</h2>
+  <table
+    style="
+      border: 1px solid black;
+      border-collapse: collapse;
+      background-color: #bac8e4;
+    "
+  >
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Total Amount</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Payment Method</th>
+        <th>Created At</th>
+        <th>Paid</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.total_amount }} EGP</td>
+        <td>{{ order.orderdetail.name }}</td>
+        <td>{{ order.orderdetail.email }}</td>
+        <td>{{ order.orderdetail.phone }}</td>
+        <td>{{ order.orderdetail.address }}</td>
+        <td>{{ order.orderdetail.payment_method }}</td>
+        <td>{{ order.orderdetail.created_at }}</td>
+        <td>{{ order.orderdetail.paid }}</td>
+        <td>
+          <a
+            href="{% url 'delete_order' order.id %}"
+            onclick="return confirm('Are you sure you want to delete this order?');"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "app/base.html" %} {% load static %} {% block main-search %}
+<div
+  class="search-container"
+  style="
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: #bac8e4;
+    height: 50px;
+  "
+>
+  <form method="GET" action="{% url 'search' %}">
+    <input
+      style="height: 30px"
+      class="search-input"
+      type="text"
+      name="q"
+      placeholder="Search products..."
+    />
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+{% if results %}
+<section id="product1" class="section-p1">
+  <div class="pro-container">
+    {% for product in results %}
+    <div
+      class="pro"
+      onclick="window.location.href='{{ product.get_absolute_url }}';"
+    >
+      <img
+        src="{% static '/img/products/'%}/{{ product.image_url }}"
+        alt="{{ product.name }}"
+      />
+      <div class="des">
+        <span>{{ product.brand }}</span>
+        <h5>{{ product.name }}</h5>
+        <!-- Add your star rating logic here -->
+        <h4>{{ product.price }} EGP</h4>
+        <a href="{% url 'add_to_cart' product.id %}"><i class="fa-solid fa-cart-shopping cart"></i></a>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<p>No results found.</p>
+{% endif %} {% endblock main-search%}

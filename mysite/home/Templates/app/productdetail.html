@@ -1,0 +1,86 @@
+{% extends "app/base.html" %} {% load static%} {% block main-detail%}
+<!-- ===================== -->
+<!--   Prodetails Section    -->
+<!-- ===================== -->
+<!-- Trong template main-detail.html -->
+<section id="prodetails" class="section-p1">
+  <div class="single-pro-image">
+    <img
+      src="{% static 'img/products/' %}{{ product.image_url }}"
+      width="100%"
+      id="MainImg"
+      alt="{{ product.name }}"
+    />
+
+    <div class="small-img-group">
+      {% for image in product.additional_images.all %}
+      <div class="small-img-col">
+        <img
+          src="{% static 'img/products/' %}{{ product.image_url }}"
+          width="100%"
+          class="small-img"
+          alt="{{ product.name }}"
+        />
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="single-pro-details">
+    <h6>Home / {{ product.brand }}</h6>
+    <h4>{{ product.name }}</h4>
+    <h2>{{ product.price }} EGP</h2>
+    <select>
+      <option>Select Size</option>
+      {% for size in product.sizes %}
+      <option>{{ size }}</option>
+      {% endfor %}
+    </select>
+    {% comment %} <input type="number" name="quantity" value="quantity" min="1" /> {% endcomment %}
+    <button class="normal">
+      <a href="{% url 'add_to_cart' product.id %}">Add to cart</a>
+    </button>
+    <h4>Product Details</h4>
+    <span>{{ product.description }}</span>
+  </div>
+</section>
+
+<!-- ===================== -->
+<!--   Newsletter    -->
+<!-- ===================== -->
+<section id="newsletter" class="section-p1 section-m1">
+  <div class="newstext">
+    <h4>Sign Up For Newsletters</h4>
+    <p>
+      Get E-mail updates about our latest shop and
+      <span>special offers.</span>
+    </p>
+  </div>
+  <div class="form">
+    <input type="text" placeholder="Your email adress" />
+    <button class="normal">Sign Up</button>
+  </div>
+</section>
+<script>
+  var MainImg = document.getElementById("MainImg");
+  var smallimg = document.getElementsByClassName("small-img");
+
+  smallimg[0].onclick = function () {
+    MainImg.src = smallimg[0].src;
+  };
+  smallimg[1].onclick = function () {
+    MainImg.src = smallimg[1].src;
+  };
+
+  smallimg[2].onclick = function () {
+    MainImg.src = smallimg[2].src;
+  };
+
+  smallimg[3].onclick = function () {
+    MainImg.src = smallimg[3].src;
+  };
+</script>
+<!-- ============================================================================================================ -->
+<script src="script.js"></script>
+
+{% endblock main-detail%}

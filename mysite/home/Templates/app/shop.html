@@ -1,0 +1,42 @@
+{% extends "app/base.html" %} {% load static %} {% block main-shop %}
+<section id="page-header">
+  <h2>#shopfromhome</h2>
+  <p>Save more with coupons & up to 70% off!</p>
+</section>
+
+
+<section id="product1" class="section-p1">
+  <div class="pro-container">
+    {% for product in products %}
+    <div
+      class="pro"
+      onclick="window.location.href='{{ product.get_absolute_url }}';"
+    >
+      <img
+        src="{% static 'img/products/' %}{{ product.image_url }}"
+        alt="{{ product.name }}"
+      />
+      <div class="des">
+        <span>{{ product.brand }}</span>
+        <h5>{{ product.name }}</h5>
+        <!-- Add your star rating logic here -->
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <h4>{{ product.price }} EGP</h4>
+        <a href="{% url 'productdetail' product.id %}">Xem chi tiết</i></a>
+        
+        <a href="{% url 'add_to_cart' product.id %}"><i class="fa-solid fa-cart-shopping cart"></i></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+<!-- Pagination Section and Newsletter sections remain the same -->
+
+{% endblock main-shop %}

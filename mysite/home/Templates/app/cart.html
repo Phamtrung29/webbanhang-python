@@ -1,0 +1,84 @@
+{% extends "app/base.html" %}{% load static%} {% block main-cart %}
+<!-- P-Header Section -->
+<section id="page-header" class="about-header">
+  <h2>#let's_talk</h2>
+  <p>leave a message, we love to hear from you!</p>
+</section>
+
+<!-- Cart Section -->
+<section id="cart" class="section-p1">
+  <table width="100%">
+    <thead>
+      <tr>
+        <td>Remove</td>
+        <td>Image</td>
+        <td>Product</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Subtotal</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>
+          <a href="{% url 'remove_from_cart' item.id %}"
+            ><i class="far fa-times-circle"></i
+          ></a>
+        </td>
+        <td><img src="{% static 'img/products/' %}{{ item.image_url }}" /></td>
+        <td>{{ item.product_name }}</td>
+        <td>{{ item.price }} EGP</td>
+        <td>
+          <form method="POST" action="{% url 'update_cart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ item.id }}" />
+            <input
+              type="number"
+              name="quantity"
+              value="{{ item.quantity }}"
+              min="1"
+            />
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>{{ item.subtotal }} EGP</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- Cart Details -->
+<section id="cart-add" class="section-p1">
+  <div id="coupon">
+    <h3>Apply Coupon</h3>
+    <div>
+      <input type="text" placeholder="Enter Your Coupon" />
+      <button class="normal">Apply</button>
+    </div>
+  </div>
+  <div id="subtotal">
+    <h3>Cart Totals</h3>
+    <table>
+      <tr>
+        <td>Cart Subtotal</td>
+        <td>{{ cart_subtotal }} EGP</td>
+      </tr>
+      <tr>
+        <td>Shipping</td>
+        <td>10 EGP</td>
+      </tr>
+      <tr>
+        <td><strong>Total</strong></td>
+        <td><strong>{{ total_price }} EGP</strong></td>
+      </tr>
+    </table>
+    <form method="POST" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      <button type="submit" class="normal">Proceed to checkout</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div style="text-align: center; background-color: #bac8e4">
+      <h2 style="">Login</h2>
+      <form
+        method="post"
+        style="
+          border-radius: 5px;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        "
+      >
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Login</button>
+        <a href="{% url 'register' %}">Sign Up</i></a>
+      </form>
+      {% if error %}
+      <p>{{ error }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

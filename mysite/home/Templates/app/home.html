@@ -1,0 +1,204 @@
+{% extends "app/base.html" %} {% load static%} {% block main-content %}
+<section id="hero">
+  <h4>Trade-in-offer</h4>
+  <h2>Super value deals</h2>
+  <h1>On all products</h1>
+  <p>Save more with coupons & up to 70% off!</p>
+  <button id="myButton">Shop Now</button>
+</section>
+<!-- ===================== -->
+<!--    Features Section   -->
+<!-- ===================== -->
+<section id="feature" class="section-p1">
+  <div class="fe-box">
+    <img src="static/img/features/f1.png" alt="" />
+    <h6>Free Shipping</h6>
+  </div>
+  <div class="fe-box">
+    <img src="static/img/features/f2.png" alt="" />
+    <h6>Online Order</h6>
+  </div>
+  <div class="fe-box">
+    <img src="static/img/features/f3.png" alt="" />
+    <h6>Save Money</h6>
+  </div>
+  <div class="fe-box">
+    <img src="static/img/features/f4.png" alt="" />
+    <h6>Promotions</h6>
+  </div>
+  <div class="fe-box">
+    <img src="static/img/features/f5.png" alt="" />
+    <h6>xHappy Sell</h6>
+  </div>
+  <div class="fe-box">
+    <img src="static/img/features/f6.png" alt="" />
+    <h6>F24/7 Support</h6>
+  </div>
+</section>
+
+
+<div class="search-container"
+style="
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  background-color: #bac8e4;
+  height: 50px;
+"
+>
+<form method="GET" action="{% url 'search' %}">
+  <input
+    style="height: 30px"
+    class="search-input"
+    type="text"
+    name="q"
+    placeholder="Search products..."
+  />
+  <button type="submit">Search</button>
+</form>
+</div>
+
+
+{% if results %}
+<section id="product1" class="section-p1">
+  <div class="pro-container">
+    {% for product in results %}
+    <div
+      class="pro"
+      onclick="window.location.href='{{ product.get_absolute_url }}';"
+    >
+      <img
+        src="{% static '/img/products/'%}/{{ product.image_url }}"
+        alt="{{ product.name }}"
+      />
+      <div class="des">
+        <span>{{ product.brand }}</span>
+        <h5>{{ product.name }}</h5>
+        <!-- Add your star rating logic here -->
+        <h4>{{ product.price }} EGP</h4>
+        <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<p>No results found.</p>
+{% endif %}
+<!-- ===================== -->
+<!--    Products Section   -->
+<!-- ===================== -->
+
+
+ 
+<section id="product1" class="section-p1">
+  <div class="pro-container">
+    {% for product in products %}
+    <div
+      class="pro"
+      onclick="window.location.href='{{ product.get_absolute_url }}';"
+    >
+      <img
+        src="{% static 'img/products/' %}{{ product.image_url }}"
+        alt="{{ product.name }}"
+      />
+      <div class="des">
+        <span>{{ product.brand }}</span>
+        <h5>{{ product.name }}</h5>
+        <!-- Add your star rating logic here -->
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <h4>{{ product.price }} EGP</h4>
+        <a href="{% url 'productdetail' product.id %}">Xem chi tiết</i></a>
+        
+        <a href="{% url 'add_to_cart' product.id %}"><i class="fa-solid fa-cart-shopping cart"></i></a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ===================== -->
+<!--    Products Section   -->
+<!-- ===================== -->
+<section id="banner" class="section-m1">
+  <h4>Repair Services</h4>
+  <h2>Up to <span>70% off</span> - All T-shirts & Accessories</h2>
+  <button class="normal">Explore More</button>
+</section>
+<!-- ===================== -->
+<!--    New Arrivals   -->
+<!-- ===================== -->
+
+<!-- ===================== -->
+<!--    Banner 2   -->
+<!-- ===================== -->
+<section id="sm-banner" class="section-p1">
+  <div class="banner-box">
+    <div class="overlay"></div>
+    <div class="banner-content content">
+      <h4>Crazy Deals</h4>
+      <h2>Buy 1 Get 1 Free</h2>
+      <span>The best classic dress is on sale at cara</span>
+      <button class="white">Learn More</button>
+    </div>
+  </div>
+  <div class="banner-box">
+    <div class="overlay"></div>
+    <div class="banner-content content">
+      <h4>Spring/Summer</h4>
+      <h2>Upcoming Season</h2>
+      <span>The best classic dress is on sale at cara</span>
+      <button class="white">Collection</button>
+    </div>
+  </div>
+</section>
+<section id="banner3" class="section-p1">
+  <div class="banner-box">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>Seasonal Sale</h2>
+      <h3>Winter Collection 50% Off</h3>
+    </div>
+  </div>
+  <div class="banner-box">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>Elegant Collection</h2>
+      <h3>Elegant collection with special prices</h3>
+    </div>
+  </div>
+  <div class="banner-box">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>New Women Collection</h2>
+      <h3>New Summer Collection For Women</h3>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter" class="section-p1 section-m1">
+  <div class="newstext">
+    <h4>Sign Up For Newsletters</h4>
+    <p>
+      Get E-mail updates about our latest shop and
+      <span>special offers.</span>
+    </p>
+  </div>
+  <div class="form">
+    <input type="text" placeholder="Your email adress" />
+    <button class="normal">Sign Up</button>
+  </div>
+</section>
+<script>
+  document.getElementById("myButton").addEventListener("click", function () {
+    // Chuyển sang trang khác bằng cách cập nhật window.location.href
+    window.location.href = "shop";
+  });
+</script>
+{% endblock main-content%}

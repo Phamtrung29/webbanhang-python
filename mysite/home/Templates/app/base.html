@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <script
+      src="https://kit.fontawesome.com/bcb2c05d90.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Commerce</title>
+    <!-- Font Awesome Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <!-- <link rel="stylesheet" href="css/all.min.css" /> -->
+    <!-- Css -->
+    <link rel="stylesheet" href="{% static "css/style.css" %}" />
+    <!--  -->
+    <style>
+      
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <a href="{% url 'home'%}" class="logo"
+        ><img src="{% static "img/logo.svg"%}" alt="" class="logo" /></a
+      >
+      <nav>
+        <ul id="navbar">
+          <li><a href="{% url 'home'%}">Home</a></li>
+          <li><a href="{% url 'shop'%}">Shop</a></li>
+          <li><a href="{% url 'about'%}">About</a></li>
+          <li><a href="{% url 'contact'%}">Contact</a></li>
+          
+
+          
+          
+          {% if user.is_authenticated %}
+            <li id="lg-bag">
+              <a href="{% url 'cart'%}"><i class="fa fa-bag-shopping"></i></a>
+            </li>
+            <li><a href="{% url 'myorder'%}">My Orders</a></li>
+            <li><a href="{% url 'logout'%}">Logout</a></li>
+            <li>{{user.username}}</li>
+          {% else %}
+            <li><a href="{% url 'login'%}">Login</a></li>
+            <li><a href="{% url 'register'%}">Register</a></li>
+
+          {% endif %}
+          <a href="#" id="close"><i class="fa-solid fa-xmark"></i></a>
+        </ul>
+      </nav>
+      <div id="mobile">
+        <a href="cart.html"><i class="fa fa-bag-shopping"></i></a>
+        <i id="bar" class="fas fa-outdent"></i>
+      </div>
+    </header>
+
+    <!-- ===================== -->
+    <!--    Hero Section   -->
+    <!-- ===================== -->
+
+    {% block main-content %}{% endblock main-content%} 
+    {% block main-cart %}{% endblock main-cart%} 
+    {% block main-about%} {% endblock main-about%} 
+    {% block main-shop%} {% endblock main-shop%}
+    {% block main-contact%} {% endblock main-contact%} 
+    {% block main-detail%} {% endblock main-detail%}
+    {% block main-search%} {% endblock main-search%}
+    {% block main-myorder %}{% endblock main-myorder %}
+
+    <footer class="section-p1">
+      <div class="col">
+        <img src="static/img/logo.svg" alt="" class="logo" />
+        <h4>Contact</h4>
+        <p><strong>Adress:</strong> Ismailia,Egypt</p>
+        <p><strong>Phone:</strong> 0101010101010</p>
+        <p><strong>Hours:</strong> 10:00am -11:00pm, Sat -Thu</p>
+        <div class="icon follow">
+          <h4>Follow US</h4>
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+      <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View Cart</a>
+        <a href="#">My Wishlist</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2022, Web Development Project - Group18</p>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+   
+    <script>
+      // Lấy tất cả các thẻ a trong menu
+      var menuLinks = document.querySelectorAll("#navbar li a");
+    
+      // Lặp qua từng thẻ a và kiểm tra URL hiện tại
+      menuLinks.forEach(function(link) {
+        link.addEventListener("click", function() {
+          // Loại bỏ class "active" khỏi tất cả các thẻ a
+          menuLinks.forEach(function(menuLink) {
+            menuLink.classList.remove("active");
+          });
+    
+          // Thêm class "active" cho thẻ a đã được click
+          this.classList.add("active");
+        });
+    
+        // Kiểm tra URL hiện tại và so sánh với href của thẻ a
+        if (window.location.href === link.href) {
+          link.classList.add("active"); // Thêm class "active" nếu URL trùng khớp
+        }
+      });
+    </script>
+    
+    
+    
+  </body>
+</html>
